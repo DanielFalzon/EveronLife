@@ -1,0 +1,174 @@
+FrameWidgetClass {
+ Name "Ticketing"
+ {
+  ImageWidgetClass "{5E20805159CD4928}" {
+   Name "Image0"
+   Slot FrameWidgetSlot "{5E20805159CD497E}" {
+    Anchor 0 0 1 1
+    PositionX 0
+    OffsetLeft 0
+    PositionY 0
+    OffsetTop 0
+    SizeX -1820
+    OffsetRight 0
+    SizeY -1050
+    OffsetBottom 0
+   }
+   Opacity 0.871
+   Color 0 0 0 1
+  }
+  OverlayWidgetClass "{5E208057317B206A}" {
+   Name "MainContainerSizing"
+   Slot FrameWidgetSlot "{5E208057317B2045}" {
+    Anchor 0.5 0.5 0.5 0.5
+    PositionX -800
+    OffsetLeft -800
+    PositionY -450
+    OffsetTop -450
+    SizeX 1600
+    OffsetRight -800
+    SizeY 900
+    OffsetBottom -450
+   }
+   {
+    ImageWidgetClass "{5E20805C4CC8E890}" {
+     Name "Background"
+     Slot OverlayWidgetSlot "{5E20805C4CC8E8FA}" {
+      HorizontalAlign 3
+      VerticalAlign 3
+     }
+     Color 0.007 0.012 0.014 1
+    }
+    VerticalLayoutWidgetClass "{5E20805FD28A8B5E}" {
+     Name "MainContainerLayout"
+     Slot OverlayWidgetSlot "{5E20805FD28A8C95}" {
+      HorizontalAlign 3
+      VerticalAlign 3
+      Padding 20 20 20 20
+     }
+     {
+      HorizontalLayoutWidgetClass "{5E20805EA73F677C}" {
+       Name "TitleHeaderLayout"
+       Slot LayoutSlot "{5E20805B0B1EFF83}" {
+        Padding 0 0 0 30
+       }
+       Opacity 0.988
+       {
+        TextWidgetClass "{5E20805EB5D5A9BB}" {
+         Name "Text0"
+         Slot LayoutSlot "{5E20805EB5D5A999}" {
+          HorizontalAlign 0
+          Padding 0 0 0 0
+         }
+         Text "EPD Ticketing"
+         "Font Size" 40
+        }
+       }
+      }
+      ImageWidgetClass "{5E20805CC47B81DB}" {
+       Name "Seperator"
+       Slot LayoutSlot "{5E20805CC47B8125}" {
+        Padding 0 0 0 0
+       }
+       Size 1 1
+      }
+      HorizontalLayoutWidgetClass "{5E20805D92E71A5D}" {
+       Name "DataAssignmentLayout"
+       Slot LayoutSlot "{5E20805B0B1EFFC5}" {
+        HorizontalAlign 3
+        VerticalAlign 3
+        SizeMode Fill
+       }
+       {
+        FrameWidgetClass "{5E20805AC995C61D}" {
+         Name "PlayerListFrame"
+         Slot LayoutSlot "{5E20805AC995C663}" {
+          Padding 0 20 0 0
+         }
+         {
+          VerticalLayoutWidgetClass "{5E20805B4D4B0E58}" {
+           Name "PlayerListLayout"
+           Slot FrameWidgetSlot "{5E20805AC99E070E}" {
+            OffsetLeft 0
+            OffsetTop 0
+            SizeX 400
+            OffsetRight -400
+            OffsetBottom -30
+           }
+           {
+            TextWidgetClass "{5E20805A6C3A5BA9}" {
+             Name "PlayerListTitle"
+             Slot LayoutSlot "{5E20BBF6CCA532B1}" {
+              Padding 10 0 0 0
+             }
+             Text "Players"
+             "Font Size" 32
+             "Min Font Size" 32
+            }
+            ButtonWidgetClass "{5E20805B6711CB8B}" {
+             Name "Player"
+             Slot LayoutSlot "{5E20805B6711CBE1}" {
+             }
+             Color 0.008 0.012 0.016 1
+            }
+           }
+          }
+         }
+        }
+        ImageWidgetClass "{5E20805ABF5DDD94}" {
+         Name "Seperator0"
+         Slot LayoutSlot "{5E20805CC47B8125}" {
+          Padding 0 0 0 30
+         }
+         Size 1 1
+        }
+        FrameWidgetClass "{5E20805B71A0F66B}" {
+         Name "ChargeListFrame"
+         Slot LayoutSlot "{5E20805B71A0F7BE}" {
+          Padding 0 20 0 0
+         }
+         {
+          VerticalLayoutWidgetClass "{5E20805B444FD206}" {
+           Name "ChargeListLayout"
+           Slot FrameWidgetSlot "{5E20805AD7EBB3C2}" {
+            OffsetLeft 0
+            OffsetTop 0
+            SizeX 400
+            OffsetRight -400
+            OffsetBottom -30
+           }
+           {
+            TextWidgetClass "{5E20805A34D3039A}" {
+             Name "Text0"
+             Slot LayoutSlot "{5E20805A34D303F9}" {
+              Padding 10 0 0 0
+             }
+             Text "Charges"
+             "Font Size" 32
+             "Min Font Size" 32
+            }
+            ButtonWidgetClass "{5E20805B64387761}" {
+             Name "Charges"
+             Slot LayoutSlot "{5E20805B6438774F}" {
+             }
+             Color 0.008 0.012 0.016 1
+            }
+           }
+          }
+         }
+        }
+        ImageWidgetClass "{5E20805A4C77B2AB}" {
+         Name "Seperator1"
+         Slot LayoutSlot "{5E20805CC47B8125}" {
+          Padding 0 0 0 30
+         }
+         Size 1 1
+        }
+       }
+      }
+     }
+    }
+   }
+  }
+ }
+}

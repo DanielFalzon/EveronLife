@@ -1,5 +1,6 @@
 modded class SCR_CharacterControllerComponent
 {
+	
 	//------------------------------------------------------------------------------------------------
 	override void OnGadgetStateChanged(IEntity gadget, bool isInHand, bool isOnGround)
 	{
@@ -17,10 +18,15 @@ modded class SCR_CharacterControllerComponent
 
 	//------------------------------------------------------------------------------------------------
 	override void OnControlledByPlayer(IEntity owner, bool controlled)
-	{
+	{			
 		super.OnControlledByPlayer(owner, controlled);
+		
+		EL_TicketManagerComponent ticketManagerComponent = new EL_TicketManagerComponent();
+		InputManager inputManager = GetGame().GetInputManager();
+		
+		inputManager.AddActionListener("EL_Ticketing", EActionTrigger.DOWN, ticketManagerComponent.OpenTicketUI); 
 
-		// We need the eventhandler only locally on the players machine
+		// We need the eventhandler only locally on the players machines
 		PlayerController playerController = GetGame().GetPlayerController();
 		if (!controlled || !playerController || owner != playerController.GetControlledEntity()) return;
 

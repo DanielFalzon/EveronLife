@@ -1,0 +1,15 @@
+MetaFileClass {
+ Name "{8A7B27D841F8E5C8}UI/Layouts/Systems/Ticketing.layout"
+ Configurations {
+  LayoutResourceClass PC {
+  }
+  LayoutResourceClass XBOX_ONE : PC {
+  }
+  LayoutResourceClass XBOX_SERIES : PC {
+  }
+  LayoutResourceClass PS4 : PC {
+  }
+  LayoutResourceClass HEADLESS : PC {
+  }
+ }
+}

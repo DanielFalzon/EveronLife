@@ -1,5 +1,18 @@
 FrameWidgetClass : "{E6B607B27BCC1477}UI/layouts/Menus/Dialogs/ConfigurableDialog.layout" {
  {
+  ImageWidgetClass "{56D6D7CE83DA03EE}" {
+   Prefab "{56D6D7CE83DA03EE}"
+   Slot FrameWidgetSlot "{5558C3118DE4FCC1}" {
+    PositionX -8
+    OffsetLeft -8
+    PositionY 0
+    OffsetTop 0
+    SizeX 0
+    OffsetRight 8
+    SizeY 0
+    OffsetBottom 0
+   }
+  }
   SizeLayoutWidgetClass "{5CC296FE0BE2ED39}" {
    Prefab "{5CC296FE0BE2ED39}"
    {
