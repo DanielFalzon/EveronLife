@@ -20,11 +20,6 @@ modded class SCR_CharacterControllerComponent
 	override void OnControlledByPlayer(IEntity owner, bool controlled)
 	{			
 		super.OnControlledByPlayer(owner, controlled);
-		
-		EL_TicketManagerComponent ticketManagerComponent = new EL_TicketManagerComponent();
-		InputManager inputManager = GetGame().GetInputManager();
-		
-		inputManager.AddActionListener("EL_Ticketing", EActionTrigger.DOWN, ticketManagerComponent.OpenTicketUI); 
 
 		// We need the eventhandler only locally on the players machines
 		PlayerController playerController = GetGame().GetPlayerController();
@@ -40,4 +35,5 @@ modded class SCR_CharacterControllerComponent
 		EventHandlerManagerComponent eventHandler = EL_Component<EventHandlerManagerComponent>.Find(GetOwner());
 		if (eventHandler) eventHandler.RemoveScriptHandler("OnWeaponChanged", this, EL_OnWeaponChanged, false);
 	}
+	
 }

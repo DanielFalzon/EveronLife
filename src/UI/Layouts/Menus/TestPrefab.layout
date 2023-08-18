@@ -1,0 +1,12 @@
+ButtonWidgetClass "{5E24B96FD826E851}" {
+ Name "Button0"
+ Slot LayoutSlot "{5E24B96FD826E9B5}" {
+ }
+ {
+  HorizontalLayoutWidgetClass "{5E24B96FE07298E2}" {
+   Name "HorizontalLayout0"
+   Slot ButtonWidgetSlot "{5E24B96FE07298D9}" {
+   }
+  }
+ }
+}

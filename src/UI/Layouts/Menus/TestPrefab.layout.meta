@@ -1,0 +1,15 @@
+MetaFileClass {
+ Name "{D3DEB6C7C7A1390A}UI/Layouts/Menus/TestPrefab.layout"
+ Configurations {
+  LayoutResourceClass PC {
+  }
+  LayoutResourceClass XBOX_ONE : PC {
+  }
+  LayoutResourceClass XBOX_SERIES : PC {
+  }
+  LayoutResourceClass PS4 : PC {
+  }
+  LayoutResourceClass HEADLESS : PC {
+  }
+ }
+}
