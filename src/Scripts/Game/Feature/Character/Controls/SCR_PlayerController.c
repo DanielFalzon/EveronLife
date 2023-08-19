@@ -10,5 +10,7 @@ modded class SCR_PlayerController
 	void ActionOpenTicketUI(float value = 0.0, EActionTrigger trigger = 0)
 	{
 		EL_TicketUI m_TicketUI = EL_TicketUI.Cast(GetGame().GetMenuManager().OpenMenu(ChimeraMenuPreset.EL_TicketUI));
+		
+		//TODODF: Move over thhe operations for retrieving data here.
 	}
 }

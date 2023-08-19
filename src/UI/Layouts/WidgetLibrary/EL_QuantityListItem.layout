@@ -1,0 +1,163 @@
+VerticalLayoutWidgetClass {
+ Name "EL_QuantityListItem"
+ Slot LayoutSlot "{5E25026AD83FC1AA}" {
+ }
+ {
+  OverlayWidgetClass "{5E25026C4347CB76}" {
+   Name "Overlay0"
+   Slot LayoutSlot "{5E25026C4347CB6F}" {
+    Padding 0 0 8 8
+   }
+   {
+    ImageWidgetClass "{5E25026C506099ED}" {
+     Name "Background"
+     Slot OverlayWidgetSlot "{5E25026C506099C1}" {
+      HorizontalAlign 3
+     }
+     Opacity 0.3
+     Color 0 0 0 1
+     Size 32 50
+    }
+    HorizontalLayoutWidgetClass "{5E25026D6CBD2961}" {
+     Name "HorizontalLayout0"
+     Slot OverlayWidgetSlot "{5E25026BD615EEBA}" {
+      HorizontalAlign 3
+      VerticalAlign 3
+     }
+     {
+      ButtonWidgetClass "{5E25026D109B4950}" {
+       Name "ReduceButton"
+       Slot LayoutSlot "{5E25026D109B4AB5}" {
+       }
+       "Is Enabled" 0
+       Color 0.782 0.314 0 1
+       components {
+        EL_ChangeQuantityButton "{5E25026BEFBEB567}" {
+         m_bUseColorization 0
+        }
+       }
+       style blank
+       {
+        SizeLayoutWidgetClass "{5E25026ED033A7EE}" {
+         Name "SizeLayout0"
+         Slot ButtonWidgetSlot "{5E25026ED033A7C0}" {
+         }
+         {
+          OverlayWidgetClass "{5E25026EFA501554}" {
+           Name "Overlay0"
+           Slot AlignableSlot "{5E25026EFA50154F}" {
+           }
+           {
+            TextWidgetClass "{5E256151DD133083}" {
+             Name "EntityId"
+             Slot OverlayWidgetSlot "{5E256151C84BA049}" {
+             }
+             "Is Visible" 0
+            }
+            ImageWidgetClass "{5E25026E858EBD3D}" {
+             Name "Background"
+             Slot OverlayWidgetSlot "{5E25026E858EBD1E}" {
+              VerticalAlign 3
+             }
+             Color 1 0.336 0 1
+             Size 50 50
+            }
+            TextWidgetClass "{5E25026E8174DEDA}" {
+             Name "Text"
+             Slot OverlayWidgetSlot "{5E25026E8174DE3B}" {
+             }
+             Text "-"
+             "Font Size" 50
+             "Min Font Size" 44
+            }
+            PanelWidgetClass "{5E2561553DA95288}" {
+             Name "Border"
+             Slot OverlayWidgetSlot "{5E2561553DA952E3}" {
+              HorizontalAlign 3
+              VerticalAlign 3
+             }
+             Opacity 0
+             style pixel_outline
+            }
+           }
+          }
+         }
+        }
+       }
+      }
+      TextWidgetClass "{5E25026D1E4DF9C3}" {
+       Name "ButtonText"
+       Slot LayoutSlot "{5E25026D1E4DF926}" {
+        VerticalAlign 1
+        Padding 8.9 0 0 0
+        SizeMode Fill
+       }
+      }
+      ButtonWidgetClass "{5E25026E69E61302}" {
+       Name "AddButton"
+       Slot LayoutSlot "{5E25026D109B4AB5}" {
+       }
+       Color 0.782 0.314 0 1
+       components {
+        EL_ChangeQuantityButton "{5E25026BF3C6E2CE}" {
+         m_bUseColorization 0
+         m_bIsAdd 1
+        }
+       }
+       style blank
+       {
+        SizeLayoutWidgetClass "{5E25026E69E61301}" {
+         Name "SizeLayout0"
+         Slot ButtonWidgetSlot "{5E25026ED033A7C0}" {
+         }
+         Color 1 0 0 1
+         {
+          OverlayWidgetClass "{5E25026E69E6130E}" {
+           Name "Overlay0"
+           Slot AlignableSlot "{5E25026EFA50154F}" {
+           }
+           {
+            TextWidgetClass "{5E256151C84BA066}" {
+             Name "EntityId"
+             Slot OverlayWidgetSlot "{5E256151C84BA049}" {
+             }
+             "Is Visible" 0
+            }
+            ImageWidgetClass "{5E25026E69E6130C}" {
+             Name "Background"
+             Slot OverlayWidgetSlot "{5E25026E858EBD1E}" {
+              HorizontalAlign 3
+              VerticalAlign 3
+             }
+             Color 1 0.336 0 1
+             Size 50 50
+            }
+            TextWidgetClass "{5E25026E69E6130A}" {
+             Name "Text"
+             Slot OverlayWidgetSlot "{5E25026E8174DE3B}" {
+             }
+             Text "+"
+             "Font Size" 50
+             "Min Font Size" 44
+            }
+            PanelWidgetClass "{5E2561553C0EBD0B}" {
+             Name "Border"
+             Slot OverlayWidgetSlot "{5E2561553C0EBD60}" {
+              HorizontalAlign 3
+              VerticalAlign 3
+             }
+             Opacity 0
+             style pixel_outline
+            }
+           }
+          }
+         }
+        }
+       }
+      }
+     }
+    }
+   }
+  }
+ }
+}

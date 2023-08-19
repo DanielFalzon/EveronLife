@@ -228,7 +228,7 @@ FrameWidgetClass {
                }
                {
                 VerticalLayoutWidgetClass "{5E24C066FE91849C}" {
-                 Name "ChargeListButtonContainer"
+                 Name "ChargeListContainer"
                  Slot AlignableSlot "{5E24C066FE91848A}" {
                   HorizontalAlign 3
                   VerticalAlign 3

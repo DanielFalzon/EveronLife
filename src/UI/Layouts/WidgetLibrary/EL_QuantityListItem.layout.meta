@@ -1,0 +1,15 @@
+MetaFileClass {
+ Name "{1350A93B50CCAB79}UI/Layouts/WidgetLibrary/EL_QuantityListItem.layout"
+ Configurations {
+  LayoutResourceClass PC {
+  }
+  LayoutResourceClass XBOX_ONE : PC {
+  }
+  LayoutResourceClass XBOX_SERIES : PC {
+  }
+  LayoutResourceClass PS4 : PC {
+  }
+  LayoutResourceClass HEADLESS : PC {
+  }
+ }
+}

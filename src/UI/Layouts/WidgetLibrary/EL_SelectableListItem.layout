@@ -3,8 +3,10 @@ ButtonWidgetClass {
  Slot LayoutSlot "{5E24D994C9A3A015}" {
   Padding 0 0 8 8
  }
+ Color 0 0 0 1
  components {
   EL_SelectableListItemButton "{5E24D9955FA32499}" {
+   m_bCanBeToggled 1
   }
  }
  style blank
@@ -24,6 +26,13 @@ ButtonWidgetClass {
       Padding 0 0 0 0
      }
      {
+      TextWidgetClass "{5E2561518E1EBA5B}" {
+       Name "EntityId"
+       Slot OverlayWidgetSlot "{5E2561518E1EBBB5}" {
+       }
+       "Is Visible" 0
+       Text "-1"
+      }
       PanelWidgetClass "{5E24D994016D82A0}" {
        Name "Border"
        Slot OverlayWidgetSlot "{5E24D994016D828B}" {
@@ -32,12 +41,12 @@ ButtonWidgetClass {
        }
       }
       ImageWidgetClass "{5E24D99478B790C1}" {
-       Name "Image0"
+       Name "Background"
        Slot OverlayWidgetSlot "{5E24E6C666DD39FB}" {
         HorizontalAlign 3
         VerticalAlign 1
        }
-       Opacity 0.339
+       Opacity 0.349
        Color 0 0 0 1
        Size 32 50
       }

@@ -1,24 +1,24 @@
 class EL_TestData
 {
-	static array<ref DummyPlayer> GetPlayerList(int count)
+	static map<int, ref DummyPlayer> GetPlayerList(int count)
 	{
-		array<ref DummyPlayer> result = {};
+		map<int, ref DummyPlayer> result = new map<int, ref DummyPlayer>();
 		
 		for(int i = 0; i < count; i++)
 		{
-			result.Insert(new DummyPlayer(count, "Name Test " + i));
+			result.Set(i, new DummyPlayer(i, "Name Test " + i));
 		}
 		
 		return result;
 	};
 	
-	static array<ref DummyCharge> GetChargeList(int count)
+	static map<int, ref DummyCharge> GetChargeList(int count)
 	{
-		array<ref DummyCharge> result = {};
+		map<int, ref DummyCharge> result = new map<int, ref DummyCharge>();
 		
 		for(int i = 0; i < count; i++)
 		{
-			result.Insert(new DummyCharge(i, "Charge Test " + i, i * 10, i * 100));
+			result.Set(i, new DummyCharge(i, "Charge Test " + i, i * 10, i * 100));
 		}
 		
 		return result;
