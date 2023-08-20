@@ -1,16 +1,22 @@
 class EL_SelectableListItemButton : SCR_ButtonBaseComponent
 {	
 	
-	protected TextWidget m_wEntityId;
-	ref ScriptInvokerInt m_OnButtonSelected = new ScriptInvokerInt();
+	protected int m_iEntityId;
 	
-	override void HandlerAttached(Widget w)
+	
+	//------------------------------------------------------------------------------------------------
+	void SetEntityId(int entityId)
 	{
-		super.HandlerAttached(w);
-		
-		m_wEntityId = TextWidget.Cast(w.FindAnyWidget("EntityId"));
+		m_iEntityId = entityId;
 	}
 	
+	//------------------------------------------------------------------------------------------------
+	int GetEntityId()
+	{
+		return m_iEntityId;
+	}
+	
+	//------------------------------------------------------------------------------------------------
 	override void SetToggled(bool toggled, bool animate = true, bool invokeChange = true)
 	{
 		super.SetToggled(toggled, animate, invokeChange);;

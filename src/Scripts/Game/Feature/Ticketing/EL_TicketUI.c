@@ -12,10 +12,10 @@ class EL_TicketUI : ChimeraMenuBase
 	
 	protected ref map<int, ref DummyPlayer> m_playerList;
 	protected ref map<int, ref DummyCharge> m_chargeList;
-	protected ref array<int> m_selectedPlayerIdList;
-	protected ref array<int> m_selectedChargeIdList;
+	protected ref array<int> m_aSelectedPlayerIds;
+	protected ref array<int> m_aSelectedChargeIds;
 	
-	protected const string LIST_ITEM_LAYOUT = "{482EDF389BB71398}UI/Layouts/WidgetLibrary/EL_SelectableListItem.layout";
+	protected const string LIST_ITEM_LAYOUT = "{68E6F89F53D27CD3}UI/layouts/Menus/ContentBrowser/Buttons/ContentBrowser_ModularButtonText.layout";
 	protected const string QUANT_LIST_ITEM_LAYOUT = "{1350A93B50CCAB79}UI/Layouts/WidgetLibrary/EL_QuantityListItem.layout";
 	protected const string PLAYERS_CONTAINER_NAME = "PlayerListButtonContainer";
 	protected const string CHARGES_CONTAINER_NAME = "ChargeListContainer";
@@ -47,8 +47,8 @@ class EL_TicketUI : ChimeraMenuBase
 		
 		m_playerList = EL_TestData.GetPlayerList(15);
 		m_chargeList = EL_TestData.GetChargeList(30);
-		m_selectedPlayerIdList = {};
-		m_selectedChargeIdList = {};
+		m_aSelectedPlayerIds = {};
+		m_aSelectedChargeIds = {};
 		
 		this.PopulatePlayerListContainer();
 		this.PopulateChargeListContainer();
@@ -61,22 +61,22 @@ class EL_TicketUI : ChimeraMenuBase
 	}
 	
 	//------------------------------------------------------------------------------------------------
-	void OnPlayerSelected(EL_SelectableListItemButton wSelectableListItemButton, bool isToggled)
+	//To change handler to SCR_ButtonTextComponent
+	void OnPlayerSelected(SCR_ModularButtonComponent clickedbuttonComponent, bool isToggled)
 	{
-		//THEBONBON: Handler subscribing to the event
-		TextWidget wSelectedEntityId = TextWidget.Cast(wSelectableListItemButton.GetRootWidget().FindAnyWidget("EntityId"));
-		int selectedEntityId = wSelectedEntityId.GetText().ToInt();
+		//Might give issue since GetData return type is managed.
+		DummyPlayer selectedPlayer = DummyPlayer.Cast(clickedbuttonComponent.GetData());
 		
-		bool addCondition = isToggled && !m_selectedPlayerIdList.Contains(selectedEntityId);
+		bool addCondition = isToggled && !m_aSelectedPlayerIds.Contains(selectedPlayer.m_id);
 		
 		//TODODF: Order alphabetically when inserting / removing;
 		if(addCondition){
-			m_selectedPlayerIdList.Insert(selectedEntityId);
+			m_aSelectedPlayerIds.Insert(selectedPlayer.m_id);
 		}else{
-			m_selectedPlayerIdList.RemoveItem(selectedEntityId);
+			m_aSelectedPlayerIds.RemoveItem(selectedPlayer.m_id);
 		}
 		
-		Print("Selected Players: " + m_selectedPlayerIdList.ToString());
+		Print("Selected Players: " + m_aSelectedPlayerIds.ToString());
 	}
 	
 	//------------------------------------------------------------------------------------------------
@@ -84,23 +84,39 @@ class EL_TicketUI : ChimeraMenuBase
 	{
 		foreach (DummyPlayer player : m_playerList)
 		{
-			ButtonWidget wTicketingSinglePlayerItem = ButtonWidget.Cast(GetGame().GetWorkspace().CreateWidgets(LIST_ITEM_LAYOUT, m_wPlayerList));
-			TextWidget newPlayerEntryText = TextWidget.Cast(wTicketingSinglePlayerItem.FindAnyWidget("Text"));
-			TextWidget newPlayerEntryId = TextWidget.Cast(wTicketingSinglePlayerItem.FindAnyWidget("EntityId")); 
+			ButtonWidget wSinglePlayerButton = ButtonWidget.Cast(GetGame().GetWorkspace().CreateWidgets(LIST_ITEM_LAYOUT, m_wPlayerList));
+			TextWidget wSinglePlayerNameText = TextWidget.Cast(wSinglePlayerButton.FindAnyWidget("Text"));
+			SizeLayoutWidget wSinglePlayerSize = SizeLayoutWidget.Cast(wSinglePlayerButton.FindAnyWidget("Size"));
 			
-			//THEBONBON: Parent UI subscribing to the button's OnToggled event.
-			EL_SelectableListItemButton buttonHandler = EL_SelectableListItemButton.Cast(wTicketingSinglePlayerItem.FindHandler(EL_SelectableListItemButton));
+			SCR_ModularButtonComponent buttonHandler = SCR_ModularButtonComponent.Cast(wSinglePlayerButton.FindHandler(SCR_ModularButtonComponent));
+			//State to be stored in a class inheriting from Managed
 			buttonHandler.m_OnToggled.Insert(OnPlayerSelected);
+			buttonHandler.SetData(player);
 			
-			//Create a button and assign player properties.
-			newPlayerEntryText.SetText(player.m_name);
-			newPlayerEntryId.SetText(player.m_id.ToString());
+			//Format root button
+			LayoutSlot.SetPadding(wSinglePlayerButton, 0, 0, 0, 10);
+			
+			//Format text
+			LayoutSlot.SetHorizontalAlign(wSinglePlayerNameText, LayoutHorizontalAlign.Left);
+			LayoutSlot.SetVerticalAlign(wSinglePlayerNameText, LayoutVerticalAlign.Center);
+			//LayoutSlot.SetPadding(wSinglePlayerNameText, 10, 0, 0, 0); 
+			wSinglePlayerNameText.SetText(player.m_name);
+			wSinglePlayerNameText.SetExactFontSize(25);
+			
+			//Format button size
+			wSinglePlayerSize.SetHeightOverride(60);
+			
+			buttonHandler.SetEffectsEnabled("MISSING TAG??", false);
+			
+			foreach(SCR_ButtonEffectBase buttonEffect : buttonHandler.GetAllEffects())
+			{
+				Print("Effect Tag: " + buttonEffect.m_aTags.ToString());
+			}
 			
 			//Add the button as a child to the preview list. 
-			m_wPlayerList.AddChild(wTicketingSinglePlayerItem);
+			m_wPlayerList.AddChild(wSinglePlayerButton);
 			m_wPlayerList.Update();
 		}
-	
 	}
 	
 	//------------------------------------------------------------------------------------------------
@@ -111,6 +127,12 @@ class EL_TicketUI : ChimeraMenuBase
 			VerticalLayoutWidget wTicketingSingleChargeItem = VerticalLayoutWidget.Cast(GetGame().GetWorkspace().CreateWidgets(QUANT_LIST_ITEM_LAYOUT, m_wChargeList));
 			TextWidget newSingleChargeEntryText = TextWidget.Cast(wTicketingSingleChargeItem.FindAnyWidget("ButtonText"));
 			
+			//Find the AddButton and ReduceButton 
+			//Add handlers for AddButton and ReduceButton.
+			//Can be the same handler and are a ButtonWidget so they behave the same.
+			//If the charge quantity is higher than 1 then enable.
+			
+			
 			//Create a button and assign charge properties.
 			newSingleChargeEntryText.SetText(charge.m_name);
 			
@@ -119,21 +141,5 @@ class EL_TicketUI : ChimeraMenuBase
 			m_wChargeList.Update();
 		}
 	
-	}
-	
-	//------------------------------------------------------------------------------------------------
-	void UnSubscribe()
-	{
-		if (!m_wSelectableItemButton)
-			return;
-
-		m_wSelectableItemButton.m_OnButtonSelected.Remove(UpdatePlayerList);
-		m_wSelectableItemButton = null;
-	}
-	
-	//------------------------------------------------------------------------------------------------
-	void ~EL_TicketUI()
-	{
-		UnSubscribe();
 	}
 }

@@ -25,7 +25,7 @@ class EL_TestData
 	}
 }
 
-class DummyPlayer
+class DummyPlayer : Managed
 {
 	int m_id = -1;
 	string m_name = "";
