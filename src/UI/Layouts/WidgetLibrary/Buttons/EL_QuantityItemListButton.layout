@@ -31,7 +31,7 @@ VerticalLayoutWidgetClass {
        }
        "Is Enabled" 0
        components {
-        SCR_ModularButtonComponent "{56C91A11F1ECB4CD}" {
+        SCR_ModularButtonComponent "{5E2B4CC1A037A018}" {
          m_aEffects {
           SCR_ButtonEffectText "{56C91A11E8FE1C7D}" {
            m_bEnabled 0
@@ -49,6 +49,7 @@ VerticalLayoutWidgetClass {
            {
             ImageWidgetClass "{56C94160AB8D3902}" {
              Prefab "{56C94160AB8D3902}"
+             Color 0 0.033 1 1
              Size 60 60
             }
             HorizontalLayoutWidgetClass "{56C94160AB8D3903}" {
@@ -79,12 +80,12 @@ VerticalLayoutWidgetClass {
        }
        Text "+"
       }
-      ButtonWidgetClass "{5E2AA7E68814F307}" : "{8052667FD5E6D112}UI/Layouts/WidgetLibrary/Buttons/EL_ItemListButton.layout" {
+      ButtonWidgetClass "{5E2B4CC3C20EC889}" : "{8052667FD5E6D112}UI/Layouts/WidgetLibrary/Buttons/EL_ItemListButton.layout" {
        Name "AddButton"
        Slot LayoutSlot "{56C91A138E401233}" {
        }
        components {
-        SCR_ModularButtonComponent "{56C91A11F1ECB4CD}" {
+        SCR_ModularButtonComponent "{5E2B4CC1A037A018}" {
          m_aEffects {
           SCR_ButtonEffectText "{56C91A11E8FE1C7D}" {
            m_bEnabled 0
@@ -102,6 +103,7 @@ VerticalLayoutWidgetClass {
            {
             ImageWidgetClass "{56C94160AB8D3902}" {
              Prefab "{56C94160AB8D3902}"
+             Color 0 0.033 1 1
              Size 60 60
             }
             HorizontalLayoutWidgetClass "{56C94160AB8D3903}" {
@@ -116,10 +118,6 @@ VerticalLayoutWidgetClass {
                }
               }
              }
-            }
-            PanelWidgetClass "{56C94160AB8D390D}" {
-             Prefab "{56C94160AB8D390D}"
-             style pixel_frame
             }
            }
           }
