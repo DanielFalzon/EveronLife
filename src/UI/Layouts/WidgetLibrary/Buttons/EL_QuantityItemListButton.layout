@@ -1,0 +1,135 @@
+VerticalLayoutWidgetClass {
+ Name "EL_QuantityListItem"
+ Slot LayoutSlot "{5E25026AD83FC1AA}" {
+ }
+ {
+  OverlayWidgetClass "{5E2AA3258E0F8D3B}" {
+   Name "Overlay0"
+   Slot LayoutSlot "{5E25026C4347CB6F}" {
+    Padding 0 0 8 8
+   }
+   {
+    ImageWidgetClass "{5E2AA3258E0F8D38}" {
+     Name "Background"
+     Slot OverlayWidgetSlot "{5E25026C506099C1}" {
+      HorizontalAlign 3
+     }
+     Opacity 0.3
+     Color 0 0 0 1
+     Size 32 60
+    }
+    HorizontalLayoutWidgetClass "{5E2AA3258E0F8D39}" {
+     Name "HorizontalLayout0"
+     Slot OverlayWidgetSlot "{5E25026BD615EEBA}" {
+      HorizontalAlign 3
+      VerticalAlign 3
+     }
+     {
+      ButtonWidgetClass "{5E2AA7E68B372DC8}" : "{8052667FD5E6D112}UI/Layouts/WidgetLibrary/Buttons/EL_ItemListButton.layout" {
+       Name "RemoveButton"
+       Slot LayoutSlot "{56C91A138E401233}" {
+       }
+       "Is Enabled" 0
+       components {
+        SCR_ModularButtonComponent "{56C91A11F1ECB4CD}" {
+         m_aEffects {
+          SCR_ButtonEffectText "{56C91A11E8FE1C7D}" {
+           m_bEnabled 0
+          }
+         }
+         m_bCanBeToggled 0
+        }
+       }
+       {
+        SizeLayoutWidgetClass "{56C94160AB8D3900}" {
+         Prefab "{56C94160AB8D3900}"
+         {
+          OverlayWidgetClass "{56C94160AB8D3901}" {
+           Prefab "{56C94160AB8D3901}"
+           {
+            ImageWidgetClass "{56C94160AB8D3902}" {
+             Prefab "{56C94160AB8D3902}"
+             Size 60 60
+            }
+            HorizontalLayoutWidgetClass "{56C94160AB8D3903}" {
+             Prefab "{56C94160AB8D3903}"
+             {
+              TextWidgetClass "{56C94160AB8D390C}" {
+               Prefab "{56C94160AB8D390C}"
+               Text "-"
+               "Font Size" 70
+               FontProperties FontProperties "{56C91A10941A6DF0}" {
+                Bold 1
+               }
+              }
+             }
+            }
+           }
+          }
+         }
+        }
+       }
+      }
+      TextWidgetClass "{5E2AA3258E0F0FA3}" {
+       Name "ButtonText"
+       Slot LayoutSlot "{5E25026D1E4DF926}" {
+        VerticalAlign 1
+        Padding 8.9 0 0 0
+        SizeMode Fill
+       }
+       Text "+"
+      }
+      ButtonWidgetClass "{5E2AA7E68814F307}" : "{8052667FD5E6D112}UI/Layouts/WidgetLibrary/Buttons/EL_ItemListButton.layout" {
+       Name "AddButton"
+       Slot LayoutSlot "{56C91A138E401233}" {
+       }
+       components {
+        SCR_ModularButtonComponent "{56C91A11F1ECB4CD}" {
+         m_aEffects {
+          SCR_ButtonEffectText "{56C91A11E8FE1C7D}" {
+           m_bEnabled 0
+          }
+         }
+         m_bCanBeToggled 0
+        }
+       }
+       {
+        SizeLayoutWidgetClass "{56C94160AB8D3900}" {
+         Prefab "{56C94160AB8D3900}"
+         {
+          OverlayWidgetClass "{56C94160AB8D3901}" {
+           Prefab "{56C94160AB8D3901}"
+           {
+            ImageWidgetClass "{56C94160AB8D3902}" {
+             Prefab "{56C94160AB8D3902}"
+             Size 60 60
+            }
+            HorizontalLayoutWidgetClass "{56C94160AB8D3903}" {
+             Prefab "{56C94160AB8D3903}"
+             {
+              TextWidgetClass "{56C94160AB8D390C}" {
+               Prefab "{56C94160AB8D390C}"
+               Text "+"
+               "Font Size" 70
+               FontProperties FontProperties "{56C91A10941A6DF0}" {
+                Bold 1
+               }
+              }
+             }
+            }
+            PanelWidgetClass "{56C94160AB8D390D}" {
+             Prefab "{56C94160AB8D390D}"
+             style pixel_frame
+            }
+           }
+          }
+         }
+        }
+       }
+      }
+     }
+    }
+   }
+  }
+ }
+}

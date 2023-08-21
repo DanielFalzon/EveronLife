@@ -37,7 +37,7 @@ class DummyPlayer : Managed
 	}
 }
 
-class DummyCharge
+class DummyCharge : Managed
 {
 	int m_id = -1;
 	string m_name = "";

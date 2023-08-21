@@ -1,0 +1,15 @@
+MetaFileClass {
+ Name "{8052667FD5E6D112}UI/Layouts/WidgetLibrary/Buttons/EL_ItemListButton.layout"
+ Configurations {
+  LayoutResourceClass PC {
+  }
+  LayoutResourceClass XBOX_ONE : PC {
+  }
+  LayoutResourceClass XBOX_SERIES : PC {
+  }
+  LayoutResourceClass PS4 : PC {
+  }
+  LayoutResourceClass HEADLESS : PC {
+  }
+ }
+}

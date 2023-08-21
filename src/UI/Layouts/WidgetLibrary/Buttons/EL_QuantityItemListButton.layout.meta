@@ -1,0 +1,15 @@
+MetaFileClass {
+ Name "{B85C13E4B2C21DEC}UI/Layouts/WidgetLibrary/EL_QuantityItemListButton.layout"
+ Configurations {
+  LayoutResourceClass PC {
+  }
+  LayoutResourceClass XBOX_ONE : PC {
+  }
+  LayoutResourceClass XBOX_SERIES : PC {
+  }
+  LayoutResourceClass PS4 : PC {
+  }
+  LayoutResourceClass HEADLESS : PC {
+  }
+ }
+}

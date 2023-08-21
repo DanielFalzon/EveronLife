@@ -7,16 +7,14 @@ class EL_TicketUI : ChimeraMenuBase
 	protected  Widget m_wRoot;
 	protected VerticalLayoutWidget m_wPlayerList;
 	protected VerticalLayoutWidget m_wChargeList;
-	//TAG_EventHolder <- Invoker of event
-	protected EL_SelectableListItemButton m_wSelectableItemButton;
-	
+
 	protected ref map<int, ref DummyPlayer> m_playerList;
 	protected ref map<int, ref DummyCharge> m_chargeList;
 	protected ref array<int> m_aSelectedPlayerIds;
-	protected ref array<int> m_aSelectedChargeIds;
+	protected ref map<int, int> m_aSelectedChargeQuantities;
 	
-	protected const string LIST_ITEM_LAYOUT = "{68E6F89F53D27CD3}UI/layouts/Menus/ContentBrowser/Buttons/ContentBrowser_ModularButtonText.layout";
-	protected const string QUANT_LIST_ITEM_LAYOUT = "{1350A93B50CCAB79}UI/Layouts/WidgetLibrary/EL_QuantityListItem.layout";
+	protected const string LIST_ITEM_LAYOUT = "{8052667FD5E6D112}UI/Layouts/WidgetLibrary/Buttons/EL_ItemListButton.layout";
+	protected const string QUANT_LIST_ITEM_LAYOUT = "{B85C13E4B2C21DEC}UI/Layouts/WidgetLibrary/Buttons/EL_QuantityItemListButton.layout";
 	protected const string PLAYERS_CONTAINER_NAME = "PlayerListButtonContainer";
 	protected const string CHARGES_CONTAINER_NAME = "ChargeListContainer";
 	
@@ -48,7 +46,7 @@ class EL_TicketUI : ChimeraMenuBase
 		m_playerList = EL_TestData.GetPlayerList(15);
 		m_chargeList = EL_TestData.GetChargeList(30);
 		m_aSelectedPlayerIds = {};
-		m_aSelectedChargeIds = {};
+		m_aSelectedChargeQuantities = new map<int, int>();
 		
 		this.PopulatePlayerListContainer();
 		this.PopulateChargeListContainer();
@@ -61,11 +59,9 @@ class EL_TicketUI : ChimeraMenuBase
 	}
 	
 	//------------------------------------------------------------------------------------------------
-	//To change handler to SCR_ButtonTextComponent
-	void OnPlayerSelected(SCR_ModularButtonComponent clickedbuttonComponent, bool isToggled)
+	void OnPlayerSelected(SCR_ModularButtonComponent clickedPlayerComponent, bool isToggled)
 	{
-		//Might give issue since GetData return type is managed.
-		DummyPlayer selectedPlayer = DummyPlayer.Cast(clickedbuttonComponent.GetData());
+		DummyPlayer selectedPlayer = DummyPlayer.Cast(clickedPlayerComponent.GetData());
 		
 		bool addCondition = isToggled && !m_aSelectedPlayerIds.Contains(selectedPlayer.m_id);
 		
@@ -77,6 +73,64 @@ class EL_TicketUI : ChimeraMenuBase
 		}
 		
 		Print("Selected Players: " + m_aSelectedPlayerIds.ToString());
+	}
+	
+	//------------------------------------------------------------------------------------------------
+	void OnAddChargeClicked(SCR_ModularButtonComponent removeChargeComponent)
+	{
+		//Get the charge
+		HorizontalLayoutWidget wParent = HorizontalLayoutWidget.Cast(removeChargeComponent.GetRootWidget().GetParent());
+		ButtonWidget wRemoveButton = ButtonWidget.Cast(wParent.FindAnyWidget("RemoveButton"));
+		TextWidget wButtonText = TextWidget.Cast(wParent.FindAnyWidget("ButtonText"));
+		DummyCharge charge = DummyCharge.Cast(removeChargeComponent.GetData());
+		
+		int quantity = 1;
+		
+		if (!charge) return;
+		
+		//Check if charge is already added
+		if (m_aSelectedChargeQuantities.Contains(charge.m_id))
+		{
+			quantity += m_aSelectedChargeQuantities.Get(charge.m_id);
+		}
+		
+		m_aSelectedChargeQuantities.Set(charge.m_id, quantity);
+		
+		if(!wRemoveButton.IsEnabled()) wRemoveButton.SetEnabled(true);
+		wButtonText.SetText(charge.m_name + " (" + quantity + ")");
+		
+		return;
+	}
+	
+	//------------------------------------------------------------------------------------------------
+	void OnRemoveChargeClicked(SCR_ModularButtonComponent removeChargeComponent)
+	{	
+		//The remove button
+		ButtonWidget wRoot = ButtonWidget.Cast(removeChargeComponent.GetRootWidget());
+		HorizontalLayoutWidget wParent = HorizontalLayoutWidget.Cast(wRoot.GetParent());
+		ButtonWidget wAddButton = ButtonWidget.Cast(wParent.FindAnyWidget("AddButton"));
+		TextWidget wButtonText = TextWidget.Cast(wParent.FindAnyWidget("ButtonText"));
+		DummyCharge charge = DummyCharge.Cast(removeChargeCompwonent.GetData());
+		
+		//Check if charge is already added
+		if(!m_aSelectedChargeQuantities.Contains(charge.m_id)) return;
+		
+		int quantity = m_aSelectedChargeQuantities.Get(charge.m_id);
+		
+		if(quantity == 1){
+			m_aSelectedChargeQuantities.Remove(charge.m_id);
+			wRoot.SetEnabled(false);
+			wButtonText.SetText(charge.m_name);
+			Print("OnRemoveChargeClicked to Disable: " + quantity);
+			return;
+		}
+		
+		quantity -= 1;
+		
+		m_aSelectedChargeQuantities.Set(charge.m_id, quantity);
+		wButtonText.SetText(charge.m_name + " (" + quantity + ")");
+		
+		return;
 	}
 	
 	//------------------------------------------------------------------------------------------------
@@ -92,9 +146,10 @@ class EL_TicketUI : ChimeraMenuBase
 			//State to be stored in a class inheriting from Managed
 			buttonHandler.m_OnToggled.Insert(OnPlayerSelected);
 			buttonHandler.SetData(player);
+			buttonHandler.SetEffectsEnabled("on-toggle-change-text", false);
 			
 			//Format root button
-			LayoutSlot.SetPadding(wSinglePlayerButton, 0, 0, 0, 10);
+			LayoutSlot.SetPadding(wSinglePlayerButton, 0, 0, 10, 10);
 			
 			//Format text
 			LayoutSlot.SetHorizontalAlign(wSinglePlayerNameText, LayoutHorizontalAlign.Left);
@@ -105,13 +160,6 @@ class EL_TicketUI : ChimeraMenuBase
 			
 			//Format button size
 			wSinglePlayerSize.SetHeightOverride(60);
-			
-			buttonHandler.SetEffectsEnabled("MISSING TAG??", false);
-			
-			foreach(SCR_ButtonEffectBase buttonEffect : buttonHandler.GetAllEffects())
-			{
-				Print("Effect Tag: " + buttonEffect.m_aTags.ToString());
-			}
 			
 			//Add the button as a child to the preview list. 
 			m_wPlayerList.AddChild(wSinglePlayerButton);
@@ -124,20 +172,24 @@ class EL_TicketUI : ChimeraMenuBase
 	{
 		foreach (DummyCharge charge : m_chargeList)
 		{
-			VerticalLayoutWidget wTicketingSingleChargeItem = VerticalLayoutWidget.Cast(GetGame().GetWorkspace().CreateWidgets(QUANT_LIST_ITEM_LAYOUT, m_wChargeList));
-			TextWidget newSingleChargeEntryText = TextWidget.Cast(wTicketingSingleChargeItem.FindAnyWidget("ButtonText"));
+			VerticalLayoutWidget wSingleChargeItem = VerticalLayoutWidget.Cast(GetGame().GetWorkspace().CreateWidgets(QUANT_LIST_ITEM_LAYOUT, m_wChargeList));
+			TextWidget wSingleChargeText = TextWidget.Cast(wSingleChargeItem.FindAnyWidget("ButtonText"));
+			ButtonWidget wAddChargeButton = ButtonWidget.Cast(wSingleChargeItem.FindAnyWidget("AddButton"));
+			ButtonWidget wRemoveChargeButton = ButtonWidget.Cast(wSingleChargeItem.FindAnyWidget("RemoveButton"));
 			
-			//Find the AddButton and ReduceButton 
-			//Add handlers for AddButton and ReduceButton.
-			//Can be the same handler and are a ButtonWidget so they behave the same.
-			//If the charge quantity is higher than 1 then enable.
+			//Add handlers & charge ID for AddButton and ReduceButton.
+			SCR_ModularButtonComponent addChargeButtonHandler = SCR_ModularButtonComponent.Cast(wAddChargeButton.FindHandler(SCR_ModularButtonComponent));
+			SCR_ModularButtonComponent removeChargeButtonHandler = SCR_ModularButtonComponent.Cast(wRemoveChargeButton.FindHandler(SCR_ModularButtonComponent));
 			
+			addChargeButtonHandler.SetData(charge);
+			removeChargeButtonHandler.SetData(charge);
 			
-			//Create a button and assign charge properties.
-			newSingleChargeEntryText.SetText(charge.m_name);
+			addChargeButtonHandler.m_OnClicked.Insert(OnAddChargeClicked);
+			removeChargeButtonHandler.m_OnClicked.Insert(OnRemoveChargeClicked);
+									
+			wSingleChargeText.SetText(charge.m_name);
 			
-			//Add the button as a child to the preview list. 
-			m_wChargeList.AddChild(wTicketingSingleChargeItem);
+			m_wChargeList.AddChild(wSingleChargeItem);
 			m_wChargeList.Update();
 		}
 	
